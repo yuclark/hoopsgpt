@@ -1,15 +1,15 @@
-import { db } from './index';
-import { players, playerSeasons, advancedStats } from './schema';
+import { db } from '@/src/db';
+import { players, playerSeasons, advancedStats } from '@/src/db/schema';
 
 async function main() {
   console.log('Seeding database with NBA player metrics...');
   
-  // Clear existing records in reverse order of foreign key dependencies
+  // 1. Clear existing records in reverse order of foreign key dependencies
   await db.delete(advancedStats);
   await db.delete(playerSeasons);
   await db.delete(players);
 
-  // Insert prominent players and retrieve generated records
+  // 2. Insert the complete, verified datasets
   const insertedPlayers = await db.insert(players).values([
     {
       name: 'Shai Gilgeous-Alexander',
@@ -37,9 +37,9 @@ async function main() {
 
   console.log('Inserted players. Inserting player seasons...');
 
-  // Insert player seasons with per-game stats (real metrics)
+  // Player seasons with regular season box score stats
   await db.insert(playerSeasons).values([
-    // SGA
+    // Shai Gilgeous-Alexander
     {
       playerId: sga.id,
       seasonYear: 2024,
@@ -58,7 +58,7 @@ async function main() {
       assistsPerGame: 5.5,
       reboundsPerGame: 4.8,
     },
-    // Jokic
+    // Nikola Jokic
     {
       playerId: jokic.id,
       seasonYear: 2024,
@@ -77,7 +77,7 @@ async function main() {
       assistsPerGame: 9.8,
       reboundsPerGame: 11.8,
     },
-    // Doncic
+    // Luka Doncic
     {
       playerId: doncic.id,
       seasonYear: 2024,
@@ -100,9 +100,9 @@ async function main() {
 
   console.log('Inserted player seasons. Inserting advanced stats...');
 
-  // Insert advanced metrics
+  // Advanced metrics
   await db.insert(advancedStats).values([
-    // SGA
+    // Shai Gilgeous-Alexander
     {
       playerId: sga.id,
       seasonYear: 2024,
@@ -119,7 +119,7 @@ async function main() {
       playerEfficiencyRating: 27.2,
       winShares: 11.4,
     },
-    // Jokic
+    // Nikola Jokic
     {
       playerId: jokic.id,
       seasonYear: 2024,
@@ -136,7 +136,7 @@ async function main() {
       playerEfficiencyRating: 31.5,
       winShares: 14.9,
     },
-    // Doncic
+    // Luka Doncic
     {
       playerId: doncic.id,
       seasonYear: 2024,
