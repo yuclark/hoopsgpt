@@ -10,11 +10,16 @@
     "db:seed": "tsx --env-file=.env.local src/db/seed.ts"
   },
   "dependencies": {
+    "@ai-sdk/google": "^3.0.80",
+    "@ai-sdk/openai": "^3.0.68",
+    "@ai-sdk/react": "^3.0.199",
     "@neondatabase/serverless": "^1.1.0",
+    "ai": "^6.0.197",
     "drizzle-orm": "^0.45.2",
     "next": "16.2.7",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "zod": "^4.4.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
